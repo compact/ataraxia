@@ -1,0 +1,271 @@
+@import "normalize";
+@import "html5-boilerplate";
+@import "compass/css3";
+
+/*! Ataraxia */
+
+// colors
+$background-color: #12161c;
+$dark-background-color: #02060c;
+$darker-background-color: #010306;
+
+$dark-border-color: #262626;
+$light-border-color: #3a3a3a;
+
+$text-color: #dadee4;
+$light-text-color: #eaeef4;
+$dark-text-color: #82868c;
+
+$link-color: #4c86c2;
+$light-link-color: #5ca6f2;
+$dark-link-color: #3c6692;
+
+// spacing
+$large-gutter-width: 45px;
+$medium-gutter-width: 30px;
+$small-gutter-width: 15px;
+
+// font sizes
+$font-size: 20px;
+$small-font-size: 14px;
+
+// fonts
+$serif: serif;
+$sans-serif: sans-serif;
+$monospace: monospace;
+
+////////////////////////////////////////////////////////////////////////// fonts
+
+header, footer, nav, h2, h3, h4, h5, h6 {
+  font-family: $sans-serif;
+}
+article {
+  font-family: $serif;
+}
+code, pre, h1 {
+  font-family: $monospace;
+}
+
+////////////////////////////////////////////////////////////////////////// links
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  @include transition(all 0.4s ease);
+}
+
+footer, nav, p {
+  a:hover {
+    background-color: $link-color;
+    color: $text-color;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////// layout
+
+body {
+  margin: 0 0 $small-gutter-width;
+  background-color: $background-color;
+  color: $text-color;
+  font-family: $sans-serif;
+  font-size: $font-size;
+
+  // rotated background
+  &:before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+    background-image: url(../svg/square-rhombille.svg);
+    background-repeat: repeat;
+    @include transform-origin(50%, 50%);
+    @include transform(rotate(8deg));
+  }
+}
+
+#page-container {
+  margin: 0 auto;
+  width: (900px + 250px + $medium-gutter-width);
+}
+
+#nav-container {
+  display: inline-block;
+  width: 250px;
+  vertical-align: top;
+}
+
+#content, #page-footer {
+  display: inline-block;
+  margin-right: $medium-gutter-width;
+  width: 900px;
+  vertical-align: top;
+}
+
+//////////////////////////////////////////////////////////// headers and footers
+
+h1 {
+  line-height: 1;
+  font-size: 70px;
+  text-shadow: $dark-text-color 2px 2px 4px;
+
+  a {
+    color: $text-color;
+    @include transition(all 0.4s ease);
+
+    &:hover {
+      color: $light-text-color;
+
+      .slanted {
+        @include transform(rotate(0deg));
+      }
+    }
+
+    .slanted {
+      display: inline-block;
+      @include transform-origin(100%, 0%);
+      @include transform(rotate(-4deg));
+      @include transition(all 0.8s ease);
+    }
+  }
+}
+
+#content > header {
+  margin-bottom: $small-gutter-width;
+
+  h3 {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    vertical-align: top;
+    text-align: left;
+    text-transform: uppercase;
+  }
+}
+
+#content > footer {
+  margin-bottom: $small-gutter-width;
+}
+
+.pagination {
+  display: inline-block;
+  float: right;
+  vertical-align: top;
+  color: $text-color;
+  font-size: $font-size;
+}
+
+#page-footer {
+  text-align: right;
+}
+
+/////////////////////////////////////////////////////////////////////////// navs
+
+nav {
+  border-top: 1px solid $dark-border-color;
+  border-bottom: 1px solid #000;
+  font-size: $small-font-size;
+
+  &:first-child {
+    border-top: 0;
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-left: 1em;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.5em;
+      text-indent: -1em;
+      line-height: 1.2;
+    }
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+/////////////////////////////////////////////////////////////////////// articles
+
+article {
+  margin: 0 0 $large-gutter-width;
+  border-width: 1px;
+  border-style: solid;
+  border-color:
+    $light-border-color
+    $dark-border-color
+    $dark-border-color
+    $light-border-color;
+  padding:
+    ($medium-gutter-width - $font-size / 2)
+    $medium-gutter-width;
+  background-color: $dark-background-color;
+  @include transition(all 0.4s ease);
+
+  &:hover {
+    border-color:
+      $dark-border-color
+      $light-border-color
+      $light-border-color
+      $dark-border-color;
+    background-color: $darker-background-color;
+  }
+
+  &:last-of-type {
+    margin-bottom: $small-gutter-width;
+  }
+
+  h2 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    text-shadow: $dark-text-color 1px 1px 2px;
+    line-height: 1;
+    font-size: 40px;
+
+    a {
+      text-shadow: $dark-link-color 1px 1px 2px;
+      @include transition(all 0.4s ease);
+
+      &:hover {
+        color: $light-link-color;
+        text-shadow: $link-color 1px 1px 2px;
+      }
+    }
+  }
+
+  p, li {
+    text-align: justify;
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////// data
+
+abbr[title] {
+  border-bottom: 0;
+}
+
+address {
+  display: inline;
+  font-style: normal;
+}
+
+footer {
+  color: $dark-text-color;
+  font-size: $small-font-size;
+}

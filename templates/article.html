@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title -%}
+  {{ SITENAME }} - {{ article.title }}
+{%- endblock %}
+
+{% block head %}
+  {{ super() }}
+
+  {% for keyword in article.keywords %}
+    <meta name="keywords" contents="{{keyword}}" />
+  {% endfor %}
+
+  {% for description in article.description %}
+    <meta name="description" contents="{{description}}" />
+  {% endfor %}
+
+  {% for tag in article.tags %}
+    <meta name="tags" contents="{{tag}}" />
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
+  {% include 'includes/article.html' %}
+{% endblock %}

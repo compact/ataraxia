@@ -1,0 +1,46 @@
+<article class="hentry">
+  <header>
+    <h2 class="entry-title">
+      {% if articles_page %}
+        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+            title="Permalink to {{ article.title|striptags }}">
+          {{- article.title -}}
+        </a>
+      {% else %}
+        {{ article.title }}
+      {% endif %}
+    </h2>
+
+    {% import 'translations.html' as translations with context %}
+    {{ translations.translations_for(article) }}
+  </header>
+
+  <footer class="post-info">
+    <abbr class="published" title="{{ article.date.isoformat() }}">
+      {{- article.locale_date -}}
+    </abbr>
+
+    {% if article.modified %}
+      <abbr class="modified" title="{{ article.modified.isoformat() }}">
+        {{- article.locale_modified -}}
+      </abbr>
+    {% endif %}
+
+    {% if article.author %}
+      <address class="vcard author">
+        by
+        <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">
+          {{ article.author }}
+        </a>
+      </address>
+    {% endif %}
+  </footer>
+
+  <div class="entry-content">
+    {% if articles_page %}
+      {{ article.summary }}
+    {% else %}
+      {{ article.content }}
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,91 @@
+{% if article and article.related_posts %}
+  <nav>
+    <h3>Related posts</h3>
+    <ul>
+      {% for related_post in article.related_posts %}
+        <li>
+          <a href="{{ SITEURL }}/{{ related_post.url }}">
+            {{- related_post.title -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+{% if MENUITEMS %}
+  <nav>
+    <h3>Menu</h3>
+    <ul>
+      {% for title, link in MENUITEMS %}
+        <li>
+          <a href="{{ link }}">
+            {{- title -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+{% if DISPLAY_PAGES_ON_MENU %}
+  <nav>
+    <h3>Pages</h3>
+    <ul>
+      {% for p in PAGES %}
+        <li{% if p == page %} class="active"{% endif %}>
+          <a href="{{ SITEURL }}/{{ p.url }}">
+            {{- p.title -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+{# on a category page, list all posts in that category #}
+{% if DISPLAY_CATEGORIES_ON_MENU and category and articles_page %}
+  <nav>
+    <h3>Posts in category {{ category }}</h3>
+    <ul>
+      {% for a in articles[:(NAV_POSTS_MAX or 10)] %}
+        <li>
+          <a href="{{ SITEURL }}/{{ a.url }}">
+            {{- a.title -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+{# a category is highlighted on every category page and article #}
+{% if DISPLAY_CATEGORIES_ON_MENU %}
+  <nav>
+    <h3>Categories</h3>
+    <ul>
+      {% for c, c_articles in categories %}
+        <li>
+          <a {% if c == category %} class="active" {% endif %}
+              href="{{ SITEURL }}/{{ c.url }}">
+            {{- c -}}
+          </a>
+          ({{ c_articles.__len__() }})
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+<nav>
+  <h3>Latest updated posts</h3>
+  <ul>
+    {% for a in (all_articles or articles)[:(NAV_POSTS_MAX or 10)] %}
+      <li{% if a == article %} class="active"{% endif %}>
+        <a href="{{ SITEURL }}/{{ a.url }}">
+          {{- a.title -}}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

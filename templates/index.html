@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title -%}
+  {{ SITENAME }}
+  {%- block subtitle %}
+  {% endblock subtitle %}
+  {% if DEFAULT_PAGINATION and articles_page.number > 1 -%}
+    , Page {{articles_page.number}}
+  {%- endif %}
+{% endblock %}
+
+{% block content %}
+  {% block content_header %}
+    {# don't show this header on the home page #}
+    {% if output_file != 'index.html' or articles_page.number > 1 %}
+      <header>
+        <h3>
+          {# templates extending this can set their own title #}
+          {% block content_title %}
+            Showing latest updated posts
+          {% endblock %}
+        </h3>
+
+        {% if DEFAULT_PAGINATION and articles_paginator.num_pages > 1 %}
+          {% include 'includes/pagination.html' %}
+        {% endif %}
+      </header>
+    {% endif %}
+  {% endblock %}
+
+  {# article blocks #}
+  {% for article in articles_page.object_list %}
+    {% include 'includes/article.html' %}
+  {% endfor %}
+
+  {% if DEFAULT_PAGINATION and articles_paginator.num_pages > 1 %}
+    <footer class="clearfix">
+      {% include 'includes/pagination.html' %}
+    </footer>
+  {% endif %}
+{% endblock content %}
