@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-{% block title -%}
-  {{ SITENAME }} - {{ article.title }}
-{%- endblock %}
-
 {% block head %}
   {{ super() }}
 
@@ -18,7 +14,23 @@
   {% for tag in article.tags %}
     <meta name="tags" contents="{{tag}}" />
   {% endfor %}
+
+  {% if article.css %}
+    {% for css in article.css.split(',') %}
+      <link rel="stylesheet" href="{{css}}">
+    {% endfor %}
+  {% endif %}
 {% endblock %}
+
+{% block title -%}
+  {{ SITENAME }} - {{ article.title }}
+{%- endblock %}
+
+{% if article.body_class %}
+  {% block body_tag %}
+    <body class="{{ article.body_class }}">
+  {% endblock %}
+{% endif %}
 
 {% block content %}
   {% include 'includes/article.html' %}
