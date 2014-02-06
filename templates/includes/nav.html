@@ -1,4 +1,4 @@
-{% if article and article.related_posts %}
+{%- if article and article.related_posts -%}
   <nav>
     <h3>Related posts</h3>
     <ul>
@@ -11,9 +11,9 @@
       {% endfor %}
     </ul>
   </nav>
-{% endif %}
+{%- endif -%}
 
-{% if MENUITEMS %}
+{%- if MENUITEMS -%}
   <nav>
     <h3>Menu</h3>
     <ul>
@@ -26,9 +26,9 @@
       {% endfor %}
     </ul>
   </nav>
-{% endif %}
+{%- endif -%}
 
-{% if DISPLAY_PAGES_ON_MENU %}
+{%- if DISPLAY_PAGES_ON_MENU -%}
   <nav>
     <h3>Pages</h3>
     <ul>
@@ -41,10 +41,10 @@
       {% endfor %}
     </ul>
   </nav>
-{% endif %}
+{%- endif -%}
 
 {# on a category page, list all posts in that category #}
-{% if DISPLAY_CATEGORIES_ON_MENU and category and articles_page %}
+{%- if DISPLAY_CATEGORIES_ON_MENU and category and articles_page -%}
   <nav>
     <h3>Posts in category {{ category }}</h3>
     <ul>
@@ -57,10 +57,10 @@
       {% endfor %}
     </ul>
   </nav>
-{% endif %}
+{%- endif -%}
 
 {# a category is highlighted on every category page and article #}
-{% if DISPLAY_CATEGORIES_ON_MENU %}
+{%- if DISPLAY_CATEGORIES_ON_MENU -%}
   <nav>
     <h3>Categories</h3>
     <ul>
@@ -75,7 +75,7 @@
       {% endfor %}
     </ul>
   </nav>
-{% endif %}
+{%- endif -%}
 
 <nav>
   <h3>Latest updated posts</h3>
