@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block title -%}
-  {{ SITENAME }} - {{ article.title }}
+  {{ SITENAME }} - {{ article.title | striptags }}
 {%- endblock %}
 
 {% if article.body_class %}
