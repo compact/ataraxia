@@ -30,6 +30,8 @@ $large-gutter-width: 1.75em;
 $medium-gutter-width: 1.5em;
 $small-gutter-width: 0.75em;
 
+$medium-gutter-width-full-px: $font-size * 1.5;
+
 // fonts
 $serif: serif;
 $sans-serif: sans-serif;
@@ -46,6 +48,7 @@ $medium: "(min-width: " + ($small-breakpoint + 1) + ")"
 $large: "(min-width: " + ($medium-breakpoint + 1) + ")"
   + " and (max-width: " + $large-breakpoint + ")";
 $full: "(min-width: " + ($large-breakpoint + 1) + ")";
+$full-wide: "(min-width: " + ($large-breakpoint + 1) + ")";
 
 $small-medium: "(max-width: " + $medium-breakpoint + ")";
 $small-medium-large: "(max-width: " + $large-breakpoint + ")";
@@ -139,7 +142,7 @@ body {
 
 @media #{$large} {
   #page-container {
-    width: 900px;
+    width: $medium-breakpoint - $medium-gutter-width-full-px;
   }
 }
 
@@ -151,27 +154,26 @@ body {
 
 @media #{$full} {
   #page-container {
-    // $font-size * 1.5 is $medium-gutter-width in px rather than em
-    width: (900px + 250px + $font-size * 1.5);
+    width: $large-breakpoint - $medium-gutter-width-full-px;
   }
 
   #content, #page-footer {
     display: inline-block;
     margin-right: $medium-gutter-width;
-    width: 900px;
+    width: $large-breakpoint - $medium-gutter-width-full-px * 2 - 250px;
     vertical-align: top;
   }
 
   #nav-container {
     display: inline-block;
-    width: 250px; // there is room for up to 270px
+    width: 250px;
     vertical-align: top;
   }
 
   // optional wide layout
   .wide {
     #nav-container, #content, #page-footer {
-      width: 1200px;
+      width: $large-breakpoint - $medium-gutter-width-full-px;
     }
   }
 }
