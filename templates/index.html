@@ -21,7 +21,7 @@
           {% endblock %}
         </h3>
 
-        {% if DEFAULT_PAGINATION and articles_paginator.num_pages > 1 %}
+        {%- if DEFAULT_PAGINATION and articles_paginator.num_pages > 1 %}
           {% include 'includes/pagination.html' %}
         {% endif %}
       </header>
