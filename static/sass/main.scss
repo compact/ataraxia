@@ -27,7 +27,6 @@ $small-gutter-width: 15px;
 
 // font sizes
 $font-size: 20px;
-$small-font-size: 14px;
 
 // fonts
 $serif: serif;
@@ -115,7 +114,7 @@ body {
 
 h1 {
   line-height: 1;
-  font-size: 70px;
+  font-size: 3.5em;
   text-shadow: $dark-text-color 2px 2px 4px;
 
   a {
@@ -173,7 +172,7 @@ h1 {
 nav {
   border-top: 1px solid $dark-border-color;
   border-bottom: 1px solid #000;
-  font-size: $small-font-size;
+  font-size: 0.7em;
 
   &:first-child {
     border-top: 0;
@@ -268,7 +267,7 @@ article {
     margin-bottom: 0.5em;
     text-shadow: $dark-text-color 1px 1px 2px;
     line-height: 1;
-    font-size: 40px;
+    font-size: 2em;
 
     a {
       text-shadow: $dark-link-color 1px 1px 2px;
@@ -281,7 +280,7 @@ article {
     }
   }
 
-  p, li {
+  p, li, dd, blockquote {
     text-align: justify;
   }
 }
@@ -297,12 +296,39 @@ address {
   font-style: normal;
 }
 
+cite {
+  color: $dark-text-color;
+  font-size: 0.9em;
+  font-style: normal;
+}
+
 footer {
   color: $dark-text-color;
-  font-size: $small-font-size;
+  font-size: 0.7em;
 }
 
 ////////////////////////////////////////////////////////////////////////// lists
+
+.plain { // ul
+  list-style-type: none;
+}
+
+.footnotes { // ul
+  padding-left: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+}
+
+.references { // ul
+  padding-left: 0;
+  list-style-type: none;
+
+  li {
+    margin-left: 2em;
+    margin-bottom: 0.5em;
+    text-indent: -2em;
+  }
+}
 
 dt {
   margin-top: 1em;
