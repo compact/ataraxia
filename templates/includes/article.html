@@ -2,8 +2,7 @@
   <header>
     <h2 class="entry-title">
       {% if articles_page %}
-        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
-            title="Permalink to {{ article.title|striptags }}">
+        <a href="{{ SITEURL }}/{{ article.url }}">
           {{- article.title -}}
         </a>
       {% else %}
@@ -30,7 +29,7 @@
       <address class="vcard author">
         by
         <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">
-          {{ article.author }}
+          {{- article.author -}}
         </a>
       </address>
     {% endif %}
@@ -39,6 +38,11 @@
   <div class="entry-content">
     {% if articles_page %}
       {{ article.summary }}
+
+      {# show read more link only if there is more content than the summary #}
+      {% if article.summary != article.content %}
+        <p><a href="{{ SITEURL }}/{{ article.url }}">Read more…</a></p>
+      {% endif %}
     {% else %}
       {{ article.content }}
     {% endif %}
