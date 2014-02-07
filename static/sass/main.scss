@@ -143,6 +143,10 @@ body {
     padding-left: $medium-gutter-width;
     padding-right: $medium-gutter-width;
   }
+
+  .hide-small {
+    display: none;
+  }
 }
 
 @media #{$medium} {
@@ -153,11 +157,19 @@ body {
   #page-container {
     width: 95%;
   }
+
+  .hide-medium {
+    display: none;
+  }
 }
 
 @media #{$large} {
   #page-container {
     width: $medium-breakpoint - $medium-gutter-width-full-px;
+  }
+
+  .hide-large {
+    display: none;
   }
 }
 
@@ -191,6 +203,10 @@ body {
     #nav-container, #content, #page-footer {
       width: $large-breakpoint - $medium-gutter-width-full-px;
     }
+  }
+
+  .hide-full {
+    display: none;
   }
 }
 
