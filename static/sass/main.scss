@@ -22,18 +22,33 @@ $dark-link-color: #3c6692;
 
 $h1-color: #a2c6ff;
 
-// spacing
-$large-gutter-width: 45px;
-$medium-gutter-width: 30px;
-$small-gutter-width: 15px;
-
 // font sizes
 $font-size: 20px;
+
+// spacing
+$large-gutter-width: 1.75em;
+$medium-gutter-width: 1.5em;
+$small-gutter-width: 0.75em;
 
 // fonts
 $serif: serif;
 $sans-serif: sans-serif;
 $monospace: monospace;
+
+// media queries
+$small-breakpoint: 480px;
+$medium-breakpoint: 920px;
+$large-breakpoint: 1200px;
+
+$small: "(max-width: " + $small-breakpoint + ")";
+$medium: "(min-width: " + ($small-breakpoint + 1) + ")"
+  + " and (max-width: " + $medium-breakpoint + ")";
+$large: "(min-width: " + ($medium-breakpoint + 1) + ")"
+  + " and (max-width: " + $large-breakpoint + ")";
+$full: "(min-width: " + ($large-breakpoint + 1) + ")";
+
+$small-medium: "(max-width: " + $medium-breakpoint + ")";
+$small-medium-large: "(max-width: " + $large-breakpoint + ")";
 
 ////////////////////////////////////////////////////////////////////////// fonts
 
@@ -64,6 +79,10 @@ footer, nav, p {
 
 ///////////////////////////////////////////////////////////////////////// layout
 
+* {
+  @include box-sizing(border-box);
+}
+
 body {
   margin: 0 0 $small-gutter-width;
   background-color: $background-color;
@@ -89,26 +108,69 @@ body {
 
 #page-container {
   margin: 0 auto;
-  width: (900px + 250px + $medium-gutter-width);
 }
 
-#nav-container {
-  display: inline-block;
-  width: 250px;
-  vertical-align: top;
+@media #{$small} {
+  body {
+    font-size: $font-size * 0.7;
+  }
+
+  #page-container {
+    width: 100%;
+  }
+
+  #page-footer, #nav-container, #content > header, #content > footer {
+    padding-left: $medium-gutter-width;
+    padding-right: $medium-gutter-width;
+  }
 }
 
-#content, #page-footer {
-  display: inline-block;
-  margin-right: $medium-gutter-width;
-  width: 900px;
-  vertical-align: top;
+@media #{$medium} {
+  body {
+    font-size: $font-size * 0.9;
+  }
+
+  #page-container {
+    width: 95%;
+  }
 }
 
-// optional wide layout
-.wide {
-  #nav-container, #content, #page-footer {
-    width: 1200px;
+@media #{$large} {
+  #page-container {
+    width: 900px;
+  }
+}
+
+@media #{$small-medium-large} {
+  #content, #page-footer, #nav-container {
+    width: 100%;
+  }
+}
+
+@media #{$full} {
+  #page-container {
+    // $font-size * 1.5 is $medium-gutter-width in px rather than em
+    width: (900px + 250px + $font-size * 1.5);
+  }
+
+  #content, #page-footer {
+    display: inline-block;
+    margin-right: $medium-gutter-width;
+    width: 900px;
+    vertical-align: top;
+  }
+
+  #nav-container {
+    display: inline-block;
+    width: 250px; // there is room for up to 270px
+    vertical-align: top;
+  }
+
+  // optional wide layout
+  .wide {
+    #nav-container, #content, #page-footer {
+      width: 1200px;
+    }
   }
 }
 
@@ -120,6 +182,10 @@ h1 {
   text-transform: uppercase;
   line-height: 1;
   font-size: 3.5em;
+
+  @media #{$small} {
+    text-align: center;
+  }
 
   a {
     color: $h1-color;
@@ -168,31 +234,18 @@ h1 {
   float: right;
   vertical-align: top;
   color: $text-color;
-  font-size: $font-size;
+  font-size: 1em;
 }
 
 #page-footer {
   text-align: right;
+  font-size: 0.7em;
 }
 
 /////////////////////////////////////////////////////////////////////////// navs
 
 nav {
-  border-top: 1px solid $dark-border-color;
-  border-bottom: 1px solid #000;
   font-size: 0.7em;
-
-  &:first-child {
-    border-top: 0;
-
-    h3 {
-      margin-top: 0;
-    }
-  }
-
-  &:last-child {
-    border-bottom: 0;
-  }
 
   h3 {
     margin-bottom: 0.5em;
@@ -211,33 +264,82 @@ nav {
   }
 }
 
-.wide {
-  nav {
-    display: inline-block;
+// highlight current page and/or category
+.active {
+  font-weight: bold;
+}
+
+@mixin vertical-nav {
+  border-top: 1px solid $dark-border-color;
+  border-bottom: 1px solid #000;
+
+  &:first-child {
     border-top: 0;
-    border-bottom: 0;
-    border-left: 1px solid $dark-border-color;
-    border-right: 1px solid #000;
-    padding-left: $small-gutter-width;
-    width: 300px;
-    vertical-align: top;
-
-    &:first-child {
-      border-left: 0;
-    }
-
-    &:last-child {
-      border-right: 0;
-    }
 
     h3 {
       margin-top: 0;
     }
   }
+
+  &:last-child {
+    border-bottom: 0;
+  }
 }
 
-.active {
-  font-weight: bold;
+@mixin horizontal-nav($include-borders) {
+  display: inline-block;
+  border-top: 0; // override the vertical borders in the case of .wide
+  border-bottom: 0;
+  @if $include-borders {
+    border-left: 1px solid $dark-border-color;
+    border-right: 1px solid #000;
+  }
+  padding: 0 $medium-gutter-width;
+  vertical-align: top;
+
+  &:first-child {
+    border-left: 0;
+  }
+
+  &:last-child {
+    border-right: 0;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+@media #{$small} {
+  nav {
+    @include vertical-nav;
+    font-size: 1em;
+  }
+}
+
+@media #{$medium} {
+  nav {
+    @include horizontal-nav(false);
+    width: 50%;
+  }
+}
+
+@media #{$large} {
+  nav {
+    @include horizontal-nav(true);
+    width: 33%;
+  }
+}
+
+@media #{$full} {
+  nav {
+    @include vertical-nav;
+  }
+
+  .wide nav {
+    @include horizontal-nav(true);
+    width: 33%;
+  }
 }
 
 /////////////////////////////////////////////////////////////////////// articles
@@ -251,9 +353,7 @@ article {
     $dark-border-color
     $dark-border-color
     $light-border-color;
-  padding:
-    ($medium-gutter-width - $font-size / 2)
-    $medium-gutter-width;
+  padding: 1em $medium-gutter-width;
   background-color: $dark-background-color;
   line-height: 1.6;
   @include transition(all 0.4s ease);
@@ -297,6 +397,10 @@ article {
   p, li, dd, blockquote {
     text-align: justify;
   }
+
+  footer {
+    font-size: 0.8em;
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////// data
@@ -318,7 +422,6 @@ cite {
 
 footer {
   color: $dark-text-color;
-  font-size: 0.7em;
 }
 
 ////////////////////////////////////////////////////////////////////////// lists
