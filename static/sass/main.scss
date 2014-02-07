@@ -20,6 +20,8 @@ $link-color: #4c86c2;
 $light-link-color: #5ca6f2;
 $dark-link-color: #3c6692;
 
+$h1-color: #a2c6ff;
+
 // spacing
 $large-gutter-width: 45px;
 $medium-gutter-width: 30px;
@@ -113,27 +115,33 @@ body {
 //////////////////////////////////////////////////////////// headers and footers
 
 h1 {
+  margin-top: 0;
+  text-shadow: $dark-link-color 2px 2px 4px;
+  text-transform: uppercase;
   line-height: 1;
   font-size: 3.5em;
-  text-shadow: $dark-text-color 2px 2px 4px;
 
   a {
-    color: $text-color;
-    @include transition(all 0.4s ease);
+    color: $h1-color;
+    @include transition(all 1s ease);
 
     &:hover {
       color: $light-text-color;
+      text-shadow: $text-color 2px 2px 4px;
 
       .slanted {
+        color: $link-color;
+        text-shadow: $dark-link-color 2px 2px 4px;
         @include transform(rotate(0deg));
       }
     }
 
     .slanted {
       display: inline-block;
-      @include transform-origin(100%, 0%);
-      @include transform(rotate(-4deg));
-      @include transition(all 0.8s ease);
+      color: $h1-color;
+      @include transform-origin(100%, 100%);
+      @include transform(rotate(-6deg));
+      @include transition(all 1s ease);
     }
   }
 }
@@ -247,6 +255,7 @@ article {
     ($medium-gutter-width - $font-size / 2)
     $medium-gutter-width;
   background-color: $dark-background-color;
+  line-height: 1.6;
   @include transition(all 0.4s ease);
 
   &:hover {
@@ -267,7 +276,7 @@ article {
     margin-bottom: 0.5em;
     text-shadow: $dark-text-color 1px 1px 2px;
     line-height: 1;
-    font-size: 2em;
+    font-size: 2.25em;
 
     a {
       text-shadow: $dark-link-color 1px 1px 2px;
@@ -278,6 +287,11 @@ article {
         text-shadow: $link-color 1px 1px 2px;
       }
     }
+  }
+
+  h3 {
+    margin-top: 1.25em;
+    font-size: 1.4em;
   }
 
   p, li, dd, blockquote {

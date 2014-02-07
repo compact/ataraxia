@@ -41,8 +41,8 @@
     <header>
       <h1>
         <a href="{{ SITEURL }}/">
-          <span class="slanted">«{{ SITENAME.split(' ', 1)[0] }}</span>
-          {{ SITENAME.split(' ', 1)[1] }}»
+          <span class="slanted">{{ SITENAME[:H1_SLANT_INDEX or 0] }}</span>
+          {{- SITENAME[H1_SLANT_INDEX or 0:] -}}
         </a>
       </h1>
     </header>
