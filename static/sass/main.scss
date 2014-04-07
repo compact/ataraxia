@@ -20,7 +20,7 @@ $link-color: #4c86c2;
 $light-link-color: #5ca6f2;
 $dark-link-color: #3c6692;
 
-$h1-color: #a2c6ff;
+$h1-color: $text-color;
 
 // font sizes
 $font-size: 20px;
@@ -72,13 +72,13 @@ $large-full: "(min-width: " + ($medium-breakpoint + 1) + ")";
 
 ////////////////////////////////////////////////////////////////////////// fonts
 
-header, footer, nav, h2, h3, h4, h5, h6, .wide table {
+header, footer, nav, h1, h2, h3, h4, h5, h6, .wide table {
   font-family: $sans-serif;
 }
 article {
   font-family: $serif;
 }
-code, pre, h1 {
+code, pre {
   font-family: $monospace;
 }
 
@@ -231,11 +231,10 @@ body {
 //////////////////////////////////////////////////////////// headers and footers
 
 h1 {
-  margin-top: 0;
-  text-shadow: $dark-link-color 2px 2px 4px;
+  margin: 1em 0;
   text-transform: uppercase;
   line-height: 1;
-  font-size: 3.5em;
+  font-size: 1.4em;
 
   @media #{$small} {
     text-align: center;
@@ -243,25 +242,25 @@ h1 {
 
   a {
     color: $h1-color;
-    @include transition(all 1s ease);
+    @include transition(all 0.4s ease);
 
     &:hover {
       color: $light-text-color;
-      text-shadow: $text-color 2px 2px 4px;
 
       .slanted {
-        color: $link-color;
-        text-shadow: $dark-link-color 2px 2px 4px;
-        @include transform(rotate(0deg));
+        color: $light-text-color; // must be set to transition simultaneously
+                                  // with the other h1 text
+        @include transform(none);
       }
     }
 
     .slanted {
       display: inline-block;
-      color: $h1-color;
-      @include transform-origin(100%, 100%);
-      @include transform(rotate(-6deg));
-      @include transition(all 1s ease);
+      color: $h1-color; // must be set to transition simultaneously with the
+                        // other h1 text
+      @include transform-origin(100%, 0%);
+      @include transform(rotate(-90deg) translateY(-100%));
+      @include transition(all 0.4s ease);
     }
   }
 }
