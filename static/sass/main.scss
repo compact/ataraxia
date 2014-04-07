@@ -16,9 +16,8 @@ $text-color: #dadee4;
 $light-text-color: #eaeef4;
 $dark-text-color: #82868c;
 
-$link-color: #4c86c2;
-$light-link-color: #5ca6f2;
-$dark-link-color: #3c6692;
+$link-color: #719dac;
+$light-link-color: #64acc5;
 
 $h1-color: $text-color;
 
@@ -87,12 +86,12 @@ code, pre {
 a {
   color: $link-color;
   text-decoration: none;
-  @include transition(all 0.4s ease);
+  @include transition(all 0.2s ease);
 }
 
 footer, nav, p {
   a:hover {
-    background-color: $link-color;
+    background-color: rgba($link-color, 0.5);
     color: $text-color;
   }
 }
@@ -447,17 +446,14 @@ article {
   h2 {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    text-shadow: $dark-text-color 1px 1px 2px;
     line-height: 1;
     font-size: 2.25em;
 
     a {
-      text-shadow: $dark-link-color 1px 1px 2px;
       @include transition(all 0.4s ease);
 
       &:hover {
         color: $light-link-color;
-        text-shadow: $link-color 1px 1px 2px;
       }
     }
   }
