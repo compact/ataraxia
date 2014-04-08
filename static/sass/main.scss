@@ -273,8 +273,12 @@ h1 {
   }
 }
 
+h3 {
+  font-size: 1.4em;
+}
+
 #content > header {
-  margin-bottom: $small-gutter-width;
+  margin-bottom: $medium-gutter-width;
 
   h3 {
     margin-top: 0;
@@ -452,7 +456,6 @@ article {
 
   h3 {
     margin-top: 1.25em;
-    font-size: 1.4em;
   }
 
   p, li, dd, blockquote {
