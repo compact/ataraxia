@@ -31,9 +31,12 @@ $small-gutter-width: 0.75em;
 $medium-gutter-width-full-px: $font-size * 1.5;
 
 // fonts
-$serif: serif;
-$sans-serif: sans-serif;
-$monospace: monospace;
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Oxygen+Mono);
+$serif: 'Merriweather', serif;
+$sans-serif: 'Roboto', sans-serif;
+$monospace: 'Oxygen Mono', monospace;
 
 // breakpoints; each is named for the layout it bounds from above
 $small-breakpoint: 480px;
@@ -89,7 +92,7 @@ a {
 }
 
 a:hover {
-  background-color: rgba($link-color, 0.7);
+  background-color: $link-color * 0.7;
   color: $text-color;
 }
 
@@ -103,6 +106,7 @@ body {
   margin: 0 0 $small-gutter-width;
   background-color: $background-color;
   color: $text-color;
+  line-height: 1.6;
   font-family: $sans-serif;
   font-size: $font-size;
 
@@ -425,14 +429,13 @@ article {
   margin: 0 0 $large-gutter-width;
   border-width: 1px;
   border-style: solid;
-  border-color: $light-border-color;
+  border-color: $dark-border-color;
   padding: 1em $medium-gutter-width;
   background-color: $dark-background-color;
-  line-height: 1.6;
   @include transition(all 0.4s ease);
 
   &:hover {
-    border-color: $dark-border-color;
+    border-color: $light-border-color;
     background-color: $darker-background-color;
   }
 
@@ -485,6 +488,14 @@ footer {
 small {
   color: $dark-text-color;
   font-size: 0.9em;
+}
+
+code {
+  display: inline-block;
+  border: 1px solid #32363c;
+  padding: 0em 0.4em;
+  line-height: 1.2;
+  background-color: #22262c;
 }
 
 ////////////////////////////////////////////////////////////////////////// lists
