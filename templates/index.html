@@ -14,16 +14,16 @@
     {# don't show this header on the home page #}
     {% if output_file != 'index.html' or articles_page.number > 1 %}
       <header class="clearfix">
+        {%- if DEFAULT_PAGINATION and articles_paginator.num_pages > 1 %}
+          {% include 'includes/pagination.html' %}
+        {% endif %}
+
         <h3>
           {# templates extending this can set their own title #}
           {% block content_title %}
             Showing latest updated posts
           {% endblock %}
         </h3>
-
-        {%- if DEFAULT_PAGINATION and articles_paginator.num_pages > 1 %}
-          {% include 'includes/pagination.html' %}
-        {% endif %}
       </header>
     {% endif %}
   {% endblock %}

@@ -130,6 +130,10 @@ body {
   margin: 0 auto;
 }
 
+#nav-container {
+  margin-bottom: $small-gutter-width;
+}
+
 @media #{$small} {
   body {
     font-size: $font-size * 0.7;
@@ -275,10 +279,11 @@ h1 {
 
 h3 {
   font-size: 1.4em;
+  line-height: 1.2;
 }
 
 #content > header {
-  margin-bottom: $medium-gutter-width;
+  margin-bottom: $large-gutter-width;
 
   h3 {
     margin-top: 0;
@@ -287,34 +292,15 @@ h3 {
     text-transform: uppercase;
   }
 
-  @media #{$small-medium} {
-    h3 {
-      float: left;
-    }
-
-    .pagination {
-      float: right;
-    }
-  }
-
-  @media #{$large-full} {
-    h3, .pagination {
-      display: inline-block;
-      vertical-align: bottom;
-    }
-
-    h3 {
-      width: 67%;
-    }
-
-    .pagination {
-      width: 33%;
-    }
+  .pagination {
+    float: right;
+    margin-left: $small-gutter-width;
+    line-height: 1.4em * 1.2;
   }
 }
 
 #content > footer {
-  margin-bottom: $small-gutter-width;
+  margin-bottom: $medium-gutter-width;
 }
 
 .pagination {
@@ -441,10 +427,6 @@ article {
   &:hover {
     border-color: $light-border-color;
     background-color: $darker-background-color;
-  }
-
-  &:last-of-type {
-    margin-bottom: $small-gutter-width;
   }
 
   h2 {
