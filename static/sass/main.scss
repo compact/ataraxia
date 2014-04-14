@@ -1,6 +1,7 @@
 @import "normalize";
 @import "html5-boilerplate";
 @import "compass/css3";
+@import "pygments-monokai"; // code highlighting
 
 /*! Ataraxia */
 
@@ -19,6 +20,9 @@ $dark-text-color: #82868c;
 $link-color: #719dac;
 
 $h1-color: $link-color;
+
+$code-background-color: #22262c;
+$code-border-color: #32363c;
 
 // font sizes
 $font-size: 20px;
@@ -475,12 +479,21 @@ small {
   font-size: 0.9em;
 }
 
+code, .highlight pre {
+  border: 1px solid $code-border-color;
+  background-color: $code-background-color;
+}
+
 code {
   display: inline-block;
-  border: 1px solid #32363c;
   padding: 0em 0.4em;
-  line-height: 1.2;
-  background-color: #22262c;
+  font-size: 0.85em;
+  line-height: 1.4;
+}
+
+.highlight pre {
+  padding: 0 0.2em;
+  font-size: 0.8em;
 }
 
 ////////////////////////////////////////////////////////////////////////// lists
