@@ -66,7 +66,7 @@
     <ul>
       {% for c, c_articles in categories %}
         <li>
-          <a {% if c == category %} class="active" {% endif %}
+          <a {% if c == category %} class="active" {% endif -%}
               href="{{ SITEURL }}/{{ c.url }}">
             {{- c -}}
           </a>
