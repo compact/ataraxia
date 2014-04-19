@@ -518,6 +518,21 @@ code {
   font-size: 0.8em;
 }
 
+.image-container {
+  margin: $medium-gutter-width 0;
+  text-align: center;
+
+  a:hover {
+    background-color: transparent;
+  }
+
+  img {
+    @media #{$small-medium} {
+      width: 100%;
+    }
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////// lists
 
 .plain { // ul
