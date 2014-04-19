@@ -26,6 +26,11 @@ $code-border-color: #32363c;
 
 // font sizes
 $font-size: 20px;
+$h1-font-size: 1.4em;
+$h2-font-size: 2.5em;
+$h3-font-size: 1.4em;
+$article-h3-font-size: 1.8em;
+$h4-font-size: 1.2em;
 
 // spacing
 $large-gutter-width: 1.75em;
@@ -239,10 +244,11 @@ body {
 //////////////////////////////////////////////////////////// headers and footers
 
 h1 {
-  margin: $medium-gutter-width 0;
+  margin-top: $large-gutter-width / $h1-font-size * 1.2em;
+  margin-bottom: $large-gutter-width / $h1-font-size * 1.2em;
   text-transform: uppercase;
   line-height: 1;
-  font-size: 1.4em;
+  font-size: $h1-font-size;
 
   @media #{$small} {
     text-align: center;
@@ -282,7 +288,7 @@ h1 {
 }
 
 h3 {
-  font-size: 1.4em;
+  font-size: $h3-font-size;
   line-height: 1.2;
 }
 
@@ -299,7 +305,7 @@ h3 {
   .pagination {
     float: right;
     margin-left: $small-gutter-width;
-    line-height: 1.4em * 1.2;
+    line-height: $h3-font-size * 1.2;
   }
 }
 
@@ -424,7 +430,7 @@ article {
   border-width: 2px;
   border-style: solid;
   border-color: $dark-border-color;
-  padding: 1em $medium-gutter-width;
+  padding: $large-gutter-width $medium-gutter-width ($large-gutter-width - 1em);
   background-color: $dark-background-color;
   @include transition(all 0.4s ease);
 
@@ -434,14 +440,30 @@ article {
   }
 
   h2 {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    line-height: 1;
-    font-size: 2.25em;
+    margin-top: 0;
+    margin-bottom: $large-gutter-width / $h2-font-size * 1em;;
+    line-height: 1.1;
+    font-size: $h2-font-size;
   }
 
   h3 {
-    margin-top: 1.25em;
+    margin-top: $large-gutter-width / $article-h3-font-size * 1em;
+    margin-bottom: $large-gutter-width / $article-h3-font-size * 1em;
+    font-size: $article-h3-font-size;
+  }
+
+  h4 {
+    margin-top: $medium-gutter-width / $h4-font-size * 1em;
+    margin-bottom: $medium-gutter-width / $h4-font-size * 1em;
+    font-size: $h4-font-size;
+  }
+
+  hr {
+    margin-top: $large-gutter-width;
+    margin-bottom: $large-gutter-width;
+    border-top: 1px solid $light-border-color;
+    border-bottom: 1px solid $dark-border-color;
+    height: 0;
   }
 
   p, li, dd, blockquote {
