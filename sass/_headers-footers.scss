@@ -1,0 +1,84 @@
+h1 {
+  margin-top: $small-gutter-width / $h1-font-size * 1em;
+  margin-bottom: $large-gutter-width / $h1-font-size * 1em;
+  text-transform: uppercase;
+  line-height: 1;
+  font-size: $h1-font-size;
+
+  @media #{$small} {
+    text-align: center;
+  }
+
+  a {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    color: $link-color;
+    @include transition(
+      background-color 0.2s ease,
+      color 0.4s ease,
+      padding 0.6s ease
+    );
+
+    &:hover {
+      padding-left: 1.2em; // approximation to align the text with the h2 below
+      padding-right: 1.2em;
+      color: $light-text-color;
+
+      .slanted {
+        color: $light-text-color; // must be set to transition simultaneously
+                                  // with the other h1 text
+        @include transform(none);
+      }
+    }
+
+    .slanted {
+      display: inline-block;
+      color: $link-color; // must be set to transition simultaneously with the
+                        // other h1 text
+      @include transform-origin(100%, 0%);
+      @include transform(rotate(-90deg) translateY(-100%));
+      @include transition(color 0.4s ease, transform 0.6s ease);
+    }
+  }
+}
+
+h3 {
+  font-size: $h3-font-size;
+  line-height: 1.2;
+}
+
+#content > header {
+  margin-bottom: $large-gutter-width;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .pagination {
+    float: right;
+    margin-left: $small-gutter-width;
+    line-height: $h3-font-size * 1.2;
+  }
+}
+
+#content > footer {
+  margin-bottom: $large-gutter-width;
+}
+
+.pagination {
+  color: $text-color;
+  text-align: right;
+}
+
+#page-footer {
+  margin-bottom: $small-gutter-width / $footer-font-size * 1em;
+  text-align: right;
+  font-size: $footer-font-size;
+}
+
+footer {
+  color: $dark-text-color;
+}

@@ -1,0 +1,278 @@
+@import "normalize";
+@import "html5-boilerplate";
+@import "compass/css3";
+@import "pygments-monokai"; // code highlighting
+
+/*! Ataraxia */
+
+// colors
+$background-color: #12161c;
+$dark-background-color: #02060c;
+$darker-background-color: #010306;
+
+$dark-border-color: #262626;
+$light-border-color: #3a3a3a;
+
+$text-color: #dadee4;
+$light-text-color: #eaeef4;
+$dark-text-color: #82868c;
+
+$link-color: #719dac;
+
+$code-background-color: #22262c;
+$code-border-color: #32363c;
+
+// font sizes
+$font-size: 20px;
+$h1-font-size: 1.4em;
+$h2-font-size: 2.5em;
+$h3-font-size: 1.4em;
+$article-h3-font-size: 1.8em;
+$h4-font-size: 1.2em;
+$nav-font-size: 0.7em;
+$footer-font-size: 0.7em;
+
+// spacing
+$large-gutter-width: 3em;
+$medium-gutter-width: 2em;
+$small-gutter-width: 1em;
+
+$large-gutter-width-full-px: $font-size * $large-gutter-width / 1em;
+
+// breakpoints; each is named for the layout it bounds from above
+$small-breakpoint: 480px;
+$medium-breakpoint: 920px;
+$large-breakpoint: 1200px;
+
+// the width of #nav-container in the full layout
+$full-nav-width: 250px;
+
+// any article may use the metadata "layout: wide" to trigger the optional wide
+// layout for the article to fill up the width of the full layout; below this
+// breakpoint (full-thin), there is not enough room for the nav and it is below
+// the article; above this breakpoint (full-wide), there is enough room for the
+// nav and it is to the right of the article
+$full-thin-breakpoint: $large-breakpoint + $full-nav-width
+  + $large-gutter-width-full-px;
+
+// media queries generated from the constants above
+$small: "(max-width: " + $small-breakpoint + ")";
+$medium: "(min-width: " + ($small-breakpoint + 1) + ")"
+  + " and (max-width: " + $medium-breakpoint + ")";
+$large: "(min-width: " + ($medium-breakpoint + 1) + ")"
+  + " and (max-width: " + $large-breakpoint + ")";
+$full: "(min-width: " + ($large-breakpoint + 1) + ")";
+
+$full-thin: "(min-width: " + ($large-breakpoint + 1) + ")"
+  + " and (max-width: " + $full-thin-breakpoint + ")";
+$full-wide: "(min-width: " + ($full-thin-breakpoint + 1) + ")";
+
+$small-medium: "(max-width: " + $medium-breakpoint + ")";
+$small-medium-large: "(max-width: " + $large-breakpoint + ")";
+$medium-large-full: "(min-width: " + ($small-breakpoint + 1) + ")";
+$large-full: "(min-width: " + ($medium-breakpoint + 1) + ")";
+
+////////////////////////////////////////////////////////////////////////// links
+
+a {
+  color: $link-color;
+  text-decoration: none;
+  @include transition(background-color 0.2s ease, color 0.4s ease);
+}
+
+a:hover {
+  background-color: $link-color * 0.7;
+  color: $text-color;
+}
+
+///////////////////////////////////////////////////////////////////////// layout
+
+* {
+  @include box-sizing(border-box);
+}
+
+body {
+  margin: 0;
+  background-color: $background-color;
+  color: $text-color;
+  line-height: 1.6;
+  font-size: $font-size;
+
+  // rotated background
+  &:before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+    background-image: url(../svg/square-rhombille.svg);
+    background-repeat: repeat;
+    @include transform-origin(50%, 50%);
+    @include transform(rotate(8deg));
+  }
+}
+
+#page-container {
+  margin: 0 auto;
+}
+
+@media #{$small} {
+  body {
+    font-size: $font-size * 0.7;
+  }
+
+  #page-container {
+    width: 100%;
+  }
+
+  #page-footer, #nav-container, #content > header, #content > footer {
+    padding-left: $medium-gutter-width;
+    padding-right: $medium-gutter-width;
+  }
+
+  .hide-small {
+    display: none;
+  }
+}
+
+@media #{$medium} {
+  body {
+    font-size: $font-size * 0.9;
+  }
+
+  #page-container {
+    width: 95%;
+  }
+
+  .hide-medium {
+    display: none;
+  }
+}
+
+@media #{$large} {
+  #page-container {
+    width: $medium-breakpoint - $large-gutter-width-full-px;
+  }
+
+  .hide-large {
+    display: none;
+  }
+}
+
+@media #{$small-medium-large} {
+  #content, #page-footer, #nav-container {
+    width: 100%;
+  }
+}
+
+@media #{$full} {
+  #page-container {
+    width: $large-breakpoint - $large-gutter-width-full-px;
+  }
+
+  #content, #page-footer {
+    display: inline-block;
+    margin-right: $large-gutter-width;
+    width: $large-breakpoint - $large-gutter-width-full-px * 2
+      - $full-nav-width;
+    vertical-align: top;
+  }
+
+  #nav-container {
+    display: inline-block;
+    width: $full-nav-width;
+    vertical-align: top;
+  }
+
+  // optional wide layout
+  .wide {
+    #nav-container, #content, #page-footer {
+      width: $large-breakpoint - $large-gutter-width-full-px;
+    }
+  }
+
+  .hide-full {
+    display: none;
+  }
+}
+
+@media #{$full-wide} {
+  .wide {
+    // override the widths in $full above
+    #page-container {
+      width: $full-thin-breakpoint - $large-gutter-width-full-px;
+    }
+
+    #content, #page-footer {
+      width: $full-thin-breakpoint - $large-gutter-width-full-px * 2
+        - $full-nav-width;
+    }
+
+    #nav-container {
+      width: $full-nav-width;
+    }
+  }
+}
+
+/////////////////////////////////////////////////////////////// data and content
+
+abbr[title] {
+  border-bottom: 0;
+}
+
+address {
+  display: inline;
+  font-style: normal;
+}
+
+cite {
+  color: $dark-text-color;
+  font-size: 0.9em;
+  font-style: normal;
+}
+
+small {
+  color: $dark-text-color;
+  font-size: 0.9em;
+}
+
+code, .highlight pre {
+  border: 1px solid $code-border-color;
+  background-color: $code-background-color;
+}
+
+code {
+  display: inline-block;
+  padding: 0em 0.4em;
+  font-size: 0.85em;
+  line-height: 1.4;
+}
+
+.highlight pre {
+  padding: 0 0.2em;
+  font-size: 0.8em;
+}
+
+.image-container {
+  margin: $medium-gutter-width 0;
+  text-align: center;
+
+  a:hover {
+    background-color: transparent;
+  }
+
+  img {
+    @media #{$small-medium} {
+      width: 100%;
+    }
+  }
+}
+
+@import "fonts";
+@import "headers-footers";
+@import "nav";
+@import "articles";
+@import "lists";
+@import "tables";

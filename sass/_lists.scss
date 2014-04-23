@@ -1,0 +1,30 @@
+.plain { // ul
+  list-style-type: none;
+}
+
+.footnotes { // ul
+  padding-left: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+}
+
+.references { // ul
+  padding-left: 0;
+  list-style-type: none;
+
+  li {
+    margin-left: 2em;
+    margin-bottom: 0.5em;
+    text-indent: -2em;
+  }
+}
+
+dt {
+  margin-top: 1em;
+}
+
+dd {
+  display: list-item;
+  list-style-type: disc;
+  font-size: 0.9em;
+}
