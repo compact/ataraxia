@@ -19,8 +19,6 @@ $dark-text-color: #82868c;
 
 $link-color: #719dac;
 
-$h1-color: $link-color;
-
 $code-background-color: #22262c;
 $code-border-color: #32363c;
 
@@ -31,13 +29,15 @@ $h2-font-size: 2.5em;
 $h3-font-size: 1.4em;
 $article-h3-font-size: 1.8em;
 $h4-font-size: 1.2em;
+$nav-font-size: 0.7em;
+$footer-font-size: 0.7em;
 
 // spacing
-$large-gutter-width: 1.75em;
-$medium-gutter-width: 1.5em;
-$small-gutter-width: 0.75em;
+$large-gutter-width: 3em;
+$medium-gutter-width: 2em;
+$small-gutter-width: 1em;
 
-$medium-gutter-width-full-px: $font-size * 1.5;
+$large-gutter-width-full-px: $font-size * $large-gutter-width / 1em;
 
 // fonts
 @import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic);
@@ -61,7 +61,7 @@ $full-nav-width: 250px;
 // the article; above this breakpoint (full-wide), there is enough room for the
 // nav and it is to the right of the article
 $full-thin-breakpoint: $large-breakpoint + $full-nav-width
-  + $medium-gutter-width-full-px;
+  + $large-gutter-width-full-px;
 
 // media queries generated from the constants above
 $small: "(max-width: " + $small-breakpoint + ")";
@@ -112,7 +112,7 @@ a:hover {
 }
 
 body {
-  margin: 0 0 $small-gutter-width;
+  margin: 0;
   background-color: $background-color;
   color: $text-color;
   line-height: 1.6;
@@ -137,10 +137,6 @@ body {
 
 #page-container {
   margin: 0 auto;
-}
-
-#nav-container {
-  margin-bottom: $small-gutter-width;
 }
 
 @media #{$small} {
@@ -178,7 +174,7 @@ body {
 
 @media #{$large} {
   #page-container {
-    width: $medium-breakpoint - $medium-gutter-width-full-px;
+    width: $medium-breakpoint - $large-gutter-width-full-px;
   }
 
   .hide-large {
@@ -194,13 +190,13 @@ body {
 
 @media #{$full} {
   #page-container {
-    width: $large-breakpoint - $medium-gutter-width-full-px;
+    width: $large-breakpoint - $large-gutter-width-full-px;
   }
 
   #content, #page-footer {
     display: inline-block;
-    margin-right: $medium-gutter-width;
-    width: $large-breakpoint - $medium-gutter-width-full-px * 2
+    margin-right: $large-gutter-width;
+    width: $large-breakpoint - $large-gutter-width-full-px * 2
       - $full-nav-width;
     vertical-align: top;
   }
@@ -214,7 +210,7 @@ body {
   // optional wide layout
   .wide {
     #nav-container, #content, #page-footer {
-      width: $large-breakpoint - $medium-gutter-width-full-px;
+      width: $large-breakpoint - $large-gutter-width-full-px;
     }
   }
 
@@ -227,11 +223,11 @@ body {
   .wide {
     // override the widths in $full above
     #page-container {
-      width: $full-thin-breakpoint - $medium-gutter-width-full-px;
+      width: $full-thin-breakpoint - $large-gutter-width-full-px;
     }
 
     #content, #page-footer {
-      width: $full-thin-breakpoint - $medium-gutter-width-full-px * 2
+      width: $full-thin-breakpoint - $large-gutter-width-full-px * 2
         - $full-nav-width;
     }
 
@@ -244,8 +240,8 @@ body {
 //////////////////////////////////////////////////////////// headers and footers
 
 h1 {
-  margin-top: $large-gutter-width / $h1-font-size * 1.2em;
-  margin-bottom: $large-gutter-width / $h1-font-size * 1.2em;
+  margin-top: $small-gutter-width / $h1-font-size * 1em;
+  margin-bottom: $large-gutter-width / $h1-font-size * 1em;
   text-transform: uppercase;
   line-height: 1;
   font-size: $h1-font-size;
@@ -257,7 +253,7 @@ h1 {
   a {
     padding-top: 0.1em;
     padding-bottom: 0.1em;
-    color: $h1-color;
+    color: $link-color;
     @include transition(
       background-color 0.2s ease,
       color 0.4s ease,
@@ -278,7 +274,7 @@ h1 {
 
     .slanted {
       display: inline-block;
-      color: $h1-color; // must be set to transition simultaneously with the
+      color: $link-color; // must be set to transition simultaneously with the
                         // other h1 text
       @include transform-origin(100%, 0%);
       @include transform(rotate(-90deg) translateY(-100%));
@@ -310,73 +306,62 @@ h3 {
 }
 
 #content > footer {
-  margin-bottom: $medium-gutter-width;
+  margin-bottom: $large-gutter-width;
 }
 
 .pagination {
   color: $text-color;
   text-align: right;
-  font-size: 1em;
 }
 
 #page-footer {
+  margin-bottom: $small-gutter-width / $footer-font-size * 1em;
   text-align: right;
-  font-size: 0.7em;
+  font-size: $footer-font-size;
 }
 
 /////////////////////////////////////////////////////////////////////////// navs
 
+$small-gutter-width-nav: $small-gutter-width / $nav-font-size * 1em;
+$medium-gutter-width-nav: $medium-gutter-width / $nav-font-size * 1em;
+
 @mixin vertical-nav {
-  border-top: 1px solid $dark-border-color;
-  border-bottom: 1px solid #000;
-
-  &:first-child {
-    border-top: 0;
-
-    h3 {
-      margin-top: 0;
-    }
+  &::after {
+    content: "";
+    display: block;
+    margin-top: $medium-gutter-width-nav;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid $dark-border-color;
+    height: 0;
   }
 
-  &:last-child {
-    border-bottom: 0;
+  &:last-child::after {
+    display: none;
   }
 }
 
-@mixin horizontal-nav($include-borders) {
+@mixin horizontal-nav() {
   display: inline-block;
-  border-top: 0; // override the vertical borders in the case of .wide
-  border-bottom: 0;
-  @if $include-borders {
-    border-left: 1px solid $dark-border-color;
-    border-right: 1px solid #000;
-  }
-  padding: 0 $medium-gutter-width;
+  padding-right: $medium-gutter-width;
   vertical-align: top;
 
-  &:first-child {
-    border-left: 0;
-  }
-
   &:last-child {
-    border-right: 0;
-  }
-
-  h3 {
-    margin-top: 0;
+    padding-right: 0;
   }
 }
 
 nav {
-  font-size: 0.7em;
+  margin-bottom: $medium-gutter-width-nav;
+  font-size: $nav-font-size;
 
   h3 {
-    margin-bottom: 0.5em;
+    margin-top: 0;
+    margin-bottom: $small-gutter-width;
   }
 
   ul {
     list-style-type: none;
-    margin-left: 1em;
+    margin: $small-gutter-width-nav 0 $small-gutter-width-nav 1em;
     padding: 0;
 
     li {
@@ -392,12 +377,12 @@ nav {
   }
 
   @media #{$medium} {
-    @include horizontal-nav(false);
+    @include horizontal-nav();
     width: 50%;
   }
 
   @media #{$large} {
-    @include horizontal-nav(true);
+    @include horizontal-nav();
     width: 33%;
   }
 
@@ -408,7 +393,7 @@ nav {
 
 .wide nav {
   @media #{$full-thin} {
-    @include horizontal-nav(true);
+    @include horizontal-nav();
     width: 33%;
   }
 
@@ -427,28 +412,27 @@ nav {
 
 article {
   margin: 0 0 $large-gutter-width;
-  border-width: 2px;
-  border-style: solid;
-  border-color: $dark-border-color;
-  padding: $large-gutter-width $medium-gutter-width ($large-gutter-width - 1em);
-  background-color: $dark-background-color;
-  @include transition(all 0.4s ease);
+  padding: 0;
 
-  &:hover {
-    border-color: $light-border-color;
-    background-color: $darker-background-color;
+  &::after {
+    content: "";
+    display: block;
+    margin-top: $large-gutter-width;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid $dark-border-color;
+    height: 0;
   }
 
   h2 {
     margin-top: 0;
-    margin-bottom: $large-gutter-width / $h2-font-size * 1em;;
+    margin-bottom: $medium-gutter-width / $h2-font-size * 1em;;
     line-height: 1.1;
     font-size: $h2-font-size;
   }
 
   h3 {
-    margin-top: $large-gutter-width / $article-h3-font-size * 1em;
-    margin-bottom: $large-gutter-width / $article-h3-font-size * 1em;
+    margin-top: $medium-gutter-width / $article-h3-font-size * 1em;
+    margin-bottom: $medium-gutter-width / $article-h3-font-size * 1em;
     font-size: $article-h3-font-size;
   }
 
@@ -461,7 +445,7 @@ article {
   hr {
     margin-top: $large-gutter-width;
     margin-bottom: $large-gutter-width;
-    border-top: 1px solid $light-border-color;
+    border-top: 1px solid #000;
     border-bottom: 1px solid $dark-border-color;
     height: 0;
   }
