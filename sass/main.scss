@@ -271,6 +271,15 @@ code {
   }
 }
 
+::-moz-selection {
+  background-color: $text-color;
+  color: $background-color;
+}
+::selection {
+  background-color: $text-color;
+  color: $background-color;
+}
+
 @import "fonts";
 @import "headers-footers";
 @import "nav";
