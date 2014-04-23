@@ -43,6 +43,7 @@ article {
   }
 
   footer {
-    font-size: 0.8em;
+    margin-bottom: $medium-gutter-width / $article-footer-font-size * 1em;;
+    font-size: $article-footer-font-size;
   }
 }
