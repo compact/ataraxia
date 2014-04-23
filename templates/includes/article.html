@@ -14,26 +14,34 @@
     {{ translations.translations_for(article) }}
   </header>
 
-  <footer class="post-info">
-    <abbr class="published" title="{{ article.date.isoformat() }}">
-      {{- article.locale_date -}}
-    </abbr>
+  {%- if not article.hide_date or article.author != '' -%}
+    <footer class="post-info">
+      {%- if not article.hide_date -%}
+        <abbr class="published" title="{{ article.date.isoformat() }}">
+          {{- article.locale_date -}}
+        </abbr>
 
-    {% if article.modified %}
-      <abbr class="modified" title="{{ article.modified.isoformat() }}">
-        {{- article.locale_modified -}}
-      </abbr>
-    {% endif %}
+        {%- if article.modified -%}
+          —<abbr class="modified" title="{{ article.modified.isoformat() }}">
+            {{- article.locale_modified -}}
+          </abbr>
+        {%- endif -%}
+      {%- endif %}
 
-    {% if article.author %}
-      <address class="vcard author">
-        by
-        <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">
-          {{- article.author -}}
-        </a>
-      </address>
-    {% endif %}
-  </footer>
+      {% if article.author != '' -%}
+        <address class="vcard author">
+          {%- if not article.hide_date -%}
+            by
+          {%- else -%}
+            By
+          {%- endif %}
+          <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">
+            {{- article.author -}}
+          </a>
+        </address>
+      {%- endif -%}
+    </footer>
+  {%- endif -%}
 
   <div class="entry-content">
     {% if articles_page %}
