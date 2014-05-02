@@ -3,7 +3,9 @@
 @import "compass/css3";
 @import "pygments-monokai"; // code highlighting
 
-/*! Ataraxia */
+/*!
+ * Ataraxia
+ */
 
 // colors
 $background-color: #12161c;
@@ -24,7 +26,9 @@ $code-border-color: #32363c;
 
 // font sizes
 $font-size: 20px;
-$h1-font-size: 1.4em;
+$small-font-size: $font-size * 0.7;
+$medium-font-size: $font-size * 0.9;
+$h1-font-size: 1.7em;
 $h2-font-size: 2.5em;
 $h3-font-size: 1.4em;
 $article-h3-font-size: 1.8em;
@@ -37,8 +41,8 @@ $article-footer-font-size: 0.8em;
 $large-gutter-width: 3em;
 $medium-gutter-width: 2em;
 $small-gutter-width: 1em;
-
-$large-gutter-width-full-px: $font-size * $large-gutter-width / 1em;
+$medium-gutter-width-full-px: $medium-gutter-width * $font-size / 1em;
+$large-gutter-width-full-px: $large-gutter-width * $font-size / 1em;
 
 // breakpoints; each is named for the layout it bounds from above
 $small-breakpoint: 480px;
@@ -117,20 +121,18 @@ body {
 
 #page-container {
   margin: 0 auto;
+  padding-left: $medium-gutter-width; // medium and up
+  padding-right: $medium-gutter-width;
 }
 
 @media #{$small} {
   body {
-    font-size: $font-size * 0.7;
+    font-size: $small-font-size;
   }
 
   #page-container {
-    width: 100%;
-  }
-
-  #page-footer, #nav-container, #content > header, #content > footer {
-    padding-left: $medium-gutter-width;
-    padding-right: $medium-gutter-width;
+    padding-left: $small-gutter-width;
+    padding-right: $small-gutter-width;
   }
 
   .hide-small {
@@ -140,11 +142,7 @@ body {
 
 @media #{$medium} {
   body {
-    font-size: $font-size * 0.9;
-  }
-
-  #page-container {
-    width: 95%;
+    font-size: $medium-font-size;
   }
 
   .hide-medium {
@@ -154,7 +152,7 @@ body {
 
 @media #{$large} {
   #page-container {
-    width: $medium-breakpoint - $large-gutter-width-full-px;
+    width: $medium-breakpoint;
   }
 
   .hide-large {
@@ -162,22 +160,16 @@ body {
   }
 }
 
-@media #{$small-medium-large} {
-  #content, #page-footer, #nav-container {
-    width: 100%;
-  }
-}
-
 @media #{$full} {
   #page-container {
-    width: $large-breakpoint - $large-gutter-width-full-px;
+    width: $large-breakpoint;
   }
 
-  #content, #page-footer {
+  #content, #page-container > header, #page-container > footer {
     display: inline-block;
     margin-right: $large-gutter-width;
-    width: $large-breakpoint - $large-gutter-width-full-px * 2
-      - $full-nav-width;
+    width: $large-breakpoint - $full-nav-width
+      - $large-gutter-width-full-px - $medium-gutter-width-full-px * 2;
     vertical-align: top;
   }
 
@@ -189,8 +181,10 @@ body {
 
   // optional wide layout
   .wide {
-    #nav-container, #content, #page-footer {
-      width: $large-breakpoint - $large-gutter-width-full-px;
+    #nav-container, #content, #page-container > header,
+    #page-container > footer {
+      width: $large-breakpoint
+        - $large-gutter-width-full-px - $medium-gutter-width-full-px * 2;
     }
   }
 
@@ -203,12 +197,12 @@ body {
   .wide {
     // override the widths in $full above
     #page-container {
-      width: $full-thin-breakpoint - $large-gutter-width-full-px;
+      width: $full-thin-breakpoint;
     }
 
-    #content, #page-footer {
-      width: $full-thin-breakpoint - $large-gutter-width-full-px * 2
-        - $full-nav-width;
+    #content, #page-container > header, #page-container > footer {
+      width: $full-thin-breakpoint - $full-nav-width
+        - $large-gutter-width-full-px - $medium-gutter-width-full-px * 2;
     }
 
     #nav-container {

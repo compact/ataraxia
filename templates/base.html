@@ -3,6 +3,8 @@
 <head>
   {% block head %}
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
 
@@ -42,8 +44,11 @@
     <header>
       <h1>
         <a href="{{ SITEURL }}/">
-          <span class="slanted">{{ SITENAME[:H1_SLANT_INDEX or 0] }}</span>
-          {{- SITENAME[H1_SLANT_INDEX or 0:] -}}
+          {% if SLANTED_H1 %}
+            <span>{{ SITENAME.split(' ')[0] }}</span><span>{{ SITENAME.split(' ')[1] }}</span>
+          {% else %}
+            {{ SITENAME }}
+          {% endif %}
         </a>
       </h1>
     </header>
@@ -57,7 +62,7 @@
       {% include 'includes/nav.html' %}
     </div>
 
-    <footer id="page-footer">
+    <footer>
       {{ FOOTER_HTML }}
     </footer>
   </div>

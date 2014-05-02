@@ -78,7 +78,7 @@
 {%- endif -%}
 
 <nav>
-  <h3>Latest updated posts</h3>
+  <h3>Recent posts</h3>
   <ul>
     {% for a in (all_articles or articles)[:(NAV_POSTS_MAX or 10)] %}
       <li{% if a == article %} class="active"{% endif %}>

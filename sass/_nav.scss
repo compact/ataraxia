@@ -16,10 +16,14 @@ $medium-gutter-width-nav: $medium-gutter-width / $nav-font-size * 1em;
   }
 }
 
-@mixin horizontal-nav() {
+@mixin horizontal-nav {
   display: inline-block;
   padding-right: $medium-gutter-width;
   vertical-align: top;
+
+  &::after { // for cases where horizontal-nav overrides horizontal-nav
+    display: none;
+  }
 
   &:last-child {
     padding-right: 0;
@@ -36,12 +40,12 @@ nav {
   }
 
   @media #{$medium} {
-    @include horizontal-nav();
+    @include horizontal-nav;
     width: 50%;
   }
 
   @media #{$large} {
-    @include horizontal-nav();
+    @include horizontal-nav;
     width: 33%;
   }
 
@@ -74,7 +78,7 @@ nav {
 
 .wide nav {
   @media #{$full-thin} {
-    @include horizontal-nav();
+    @include horizontal-nav;
     width: 33%;
   }
 
