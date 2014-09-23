@@ -38,9 +38,9 @@ article {
     height: 0;
   }
 
-  p, li, dd, blockquote {
-    text-align: justify;
-  }
+  // p, li, dd, blockquote {
+  //   text-align: justify;
+  // }
 
   footer {
     margin-bottom: $medium-gutter-width / $article-footer-font-size * 1em;;
