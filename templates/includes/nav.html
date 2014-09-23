@@ -69,8 +69,9 @@
           <a {% if c == category %} class="active" {% endif -%}
               href="{{ SITEURL }}/{{ c.url }}">
             {{- c -}}
-          </a>
-          <small>({{ c_articles.__len__() }})</small>
+          </a><!--
+       -->&nbsp;<!--
+       --><small>({{ c_articles.__len__() }})</small>
         </li>
       {% endfor %}
     </ul>
