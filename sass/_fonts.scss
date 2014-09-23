@@ -1,17 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Merriweather:400,700,400italic,700italic);
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic);
-@import url(http://fonts.googleapis.com/css?family=Oxygen+Mono);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
 
 $serif: 'Merriweather', serif;
 $sans-serif: 'Roboto', sans-serif;
-$monospace: 'Oxygen Mono', monospace;
+$monospace: 'Source Code Pro', monospace;
 
 body, header, footer, nav, h1, h2, h3, h4, h5, h6, .wide table {
   font-family: $sans-serif;
 }
+
 article {
   font-family: $serif;
 }
+
 code, pre {
   font-family: $monospace;
 }
